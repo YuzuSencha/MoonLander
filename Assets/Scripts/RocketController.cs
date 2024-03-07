@@ -4,27 +4,53 @@ using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
+    Renderer[] renderers;
     Rigidbody2D rocket;
+    public Vector3 com;
+    public bool isFlying = false;
     
-    private float groundLevel = -4.4f;
-    private float maxVSpeed = 15f;
-    private float verticalAccel = 1f;
-    private float maxHSpeed = 10f;
-    private float horizontalAccel = 0.1f;
+    private float groundLevel = -4.4f;    
+    public float verticalAccel = 5f;
+    private float rotationSpeed = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
         this.rocket = GetComponent<Rigidbody2D>();
+        this.rocket.centerOfMass = this.com;
+        //this.renderers = GetComponentsInChildren();
+    }
+
+    bool CheckRenderers(){
+        foreach (Renderer r in renderers){
+            if(r.isVisible){
+                return true;
+            }
+        }
+        return false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool isGround = (transform.position.y > this.groundLevel)? false : true;
         
+        bool isGrounded = (transform.position.y > this.groundLevel)? false : true;
+        this.isFlying = !isGrounded;
         if (Input.GetKey(KeyCode.UpArrow)){
             this.rocket.AddForce(transform.up * this.verticalAccel, ForceMode2D.Force);
         }
+
+        if(Input.GetKey(KeyCode.RightArrow) && !isGrounded){
+            this.rocket.transform.Rotate(new Vector3(0,0,-this.rotationSpeed));
+        }
+
+        if(Input.GetKey(KeyCode.LeftArrow) && !isGrounded){
+            this.rocket.transform.Rotate(new Vector3(0,0,this.rotationSpeed));
+        }
+
+
+
+        //Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,Screen.height,0)); //top right
+        //0,0,0 left bottom
         
     }
 }

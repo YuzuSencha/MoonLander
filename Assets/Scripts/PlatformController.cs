@@ -5,21 +5,27 @@ using UnityEngine.Events;
 
 public class PlatformController : MonoBehaviour
 {
-    float timer = 3f;
+    float timer = 2f;
+    float maxTimer = 2f;
     public UnityEvent onPlatformDestroy = new UnityEvent();
+
+    GameController gc; 
     // Start is called before the first frame update
     void Start()
     {
-        onPlatformDestroy.AddListener(GameObject.Find("Logic").GetComponent<GameController>().CreatePlatform);
+        gc = GameObject.Find("Logic").GetComponent<GameController>();
+        onPlatformDestroy.AddListener(gc.CreatePlatform);
+        onPlatformDestroy.AddListener(gc.CreateSplash);
+        onPlatformDestroy.AddListener(gc.AddScore);
     }
 
     // Update is called once per frame
     void Update()
     {
         if(timer <= 0){
+            gc.prevCoordinate = gameObject.transform.position;
             onPlatformDestroy.Invoke();
-            Destroy(gameObject);
-            
+            Destroy(gameObject);            
         }
     }
 
@@ -31,6 +37,10 @@ public class PlatformController : MonoBehaviour
         if(other.gameObject.name=="Rocket"){
             timer-=Time.deltaTime;
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        timer = maxTimer;        
     }
 
     public void Test(){

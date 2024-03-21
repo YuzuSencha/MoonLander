@@ -932,6 +932,10 @@ PrefabInstance:
       propertyPath: expPrefab
       value: 
       objectReference: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
+    - target: {fileID: 479428484623753640, guid: 6b807957f4a089a47b79ed88e01f9d35, type: 3}
+      propertyPath: verticalAccel
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 2154732692395536901, guid: 6b807957f4a089a47b79ed88e01f9d35, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.39
@@ -975,6 +979,14 @@ PrefabInstance:
     - target: {fileID: 7370889879896185193, guid: 6b807957f4a089a47b79ed88e01f9d35, type: 3}
       propertyPath: m_Name
       value: Rocket
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840899287809902553, guid: 6b807957f4a089a47b79ed88e01f9d35, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840899287809902553, guid: 6b807957f4a089a47b79ed88e01f9d35, type: 3}
+      propertyPath: m_GravityScale
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7840899287809902553, guid: 6b807957f4a089a47b79ed88e01f9d35, type: 3}
       propertyPath: m_CollisionDetection

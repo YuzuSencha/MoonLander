@@ -59,7 +59,7 @@ public class RocketController : MonoBehaviour
         bool isGrounded = (transform.position.y > this.groundLevel)? false : true;
         this.isFlying = !isGrounded;
         if (Input.GetKey(KeyCode.UpArrow)){
-            this.rocket.AddForce(transform.up * this.verticalAccel, ForceMode2D.Force);
+            this.rocket.AddForce(transform.up * this.verticalAccel * Time.deltaTime, ForceMode2D.Force);
         }
 
         if(Input.GetKey(KeyCode.RightArrow)){
